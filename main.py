@@ -63,6 +63,7 @@ async def capture_and_save_screenshot_without_api(url: str, output_path: str):
                 # with open(output_path, 'wb') as f:
                 #     f.write(screenshot_data)
                 print(f"Screenshot saved successfully to {output_path}")
+                return output_path
             else:
                 print("Failed to capture screenshot")
         except Exception as e:
@@ -118,8 +119,13 @@ async def process_links(input_file, output_file):
                     else:
                         print(
                             f"Failed to get screenshot for {item['url']}. Trying to capture locally...")
-                        await capture_and_save_screenshot_without_api(
+
+                        # trying to capture screenshot locally
+                        screenshot_url = await capture_and_save_screenshot_without_api(
                             item['url'], f"screenshots/{item['label']}.png")
+
+                        repo_host = 'https://github.com/tokwalabs/tools-explored/tree/main/'
+                        item['screenshot_url'] = f'{repo_host}/{screenshot_url}'
 
         # Save the processed data
         save_json(data, output_file)
