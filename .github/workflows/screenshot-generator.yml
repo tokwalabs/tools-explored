@@ -3,7 +3,7 @@ name: Generate Screenshots
 on:
   schedule:
     # Runs at 2 AM GMT+8 (18:00 UTC the previous day)
-    - cron: '18 20 * * *'
+    - cron: '0 18 * * *'
   workflow_dispatch:  # Allows manual triggering
 
 permissions:

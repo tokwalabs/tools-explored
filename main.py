@@ -111,21 +111,20 @@ async def process_links(input_file, output_file):
         # Process each link
         for index, item in enumerate(data.get('links', [])):
             print(f'index: {index}')
-            if index >= 50:
-                if 'url' in item:
-                    screenshot_url = get_screenshot_url_with_api(item['url'])
-                    if screenshot_url:
-                        item['screenshot_url'] = screenshot_url
-                    else:
-                        print(
-                            f"Failed to get screenshot for {item['url']}. Trying to capture locally...")
+            if 'url' in item:
+                screenshot_url = get_screenshot_url_with_api(item['url'])
+                if screenshot_url:
+                    item['screenshot_url'] = screenshot_url
+                else:
+                    print(
+                        f"Failed to get screenshot for {item['url']}. Trying to capture locally...")
 
-                        # trying to capture screenshot locally
-                        screenshot_url = await capture_and_save_screenshot_without_api(
-                            item['url'], f"screenshots/{item['label']}.png")
+                    # trying to capture screenshot locally
+                    screenshot_url = await capture_and_save_screenshot_without_api(
+                        item['url'], f"screenshots/{item['label']}.png")
 
-                        repo_host = 'https://raw.githubusercontent.com/tokwalabs/tools-explored/refs/heads/main'
-                        item['screenshot_url'] = f'{repo_host}/{screenshot_url}'
+                    repo_host = 'https://raw.githubusercontent.com/tokwalabs/tools-explored/refs/heads/main'
+                    item['screenshot_url'] = f'{repo_host}/{screenshot_url}'
 
         # Save the processed data
         save_json(data, output_file)
