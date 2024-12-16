@@ -124,7 +124,7 @@ async def process_links(input_file, output_file):
                         screenshot_url = await capture_and_save_screenshot_without_api(
                             item['url'], f"screenshots/{item['label']}.png")
 
-                        repo_host = 'https://github.com/tokwalabs/tools-explored/tree/main/'
+                        repo_host = 'https://raw.githubusercontent.com/tokwalabs/tools-explored/refs/heads/main'
                         item['screenshot_url'] = f'{repo_host}/{screenshot_url}'
 
         # Save the processed data
