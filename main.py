@@ -77,7 +77,7 @@ def get_screenshot_url_with_api(page_url):
         'url': page_url,
         'screenshot': 'true',
         'meta': 'false',
-        'ttl': '3days',
+        # 'ttl': '3days',
     }
 
     try:
