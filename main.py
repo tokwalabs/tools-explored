@@ -8,7 +8,8 @@ def get_screenshot_url(page_url):
     params = {
         'url': page_url,
         'screenshot': 'true',
-        'meta': 'false'
+        'meta': 'false',
+        'ttl': '3days',
     }
 
     try:
