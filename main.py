@@ -1,5 +1,30 @@
 import json
 import requests
+import os
+
+# proxy = 'http://<user>:<pass>@<proxy>:<port>'
+# proxy_ip = ''
+# proxy_port = ''
+# proxy = f'https://{proxy_ip}:{proxy_port}'
+
+# os.environ['http_proxy'] = proxy
+# os.environ['HTTP_PROXY'] = proxy
+# os.environ['https_proxy'] = proxy
+# os.environ['HTTPS_PROXY'] = proxy
+# proxies = {
+#     "http": proxy,
+# }
+
+# proxy_test_url = 'https://api.ipify.org'
+
+# try:
+#     response = requests.get(proxy_test_url, proxies=proxies, verify=False)
+#     print(f'response {response}')
+#     print(f'response.text {response.text}')
+#     assert response.text == proxy_ip
+# except Exception as e:
+#     print(f'Error: {e}')
+#     print('Proxy does not work')
 
 
 def get_screenshot_url(page_url):
@@ -13,7 +38,7 @@ def get_screenshot_url(page_url):
     }
 
     try:
-        response = requests.get(MICROLINK_API, params=params)
+        response = requests.get(MICROLINK_API, params=params, verify=False)
         response.raise_for_status()  # Raise an exception for bad status codes
         data = response.json()
         return data.get('data', {}).get('screenshot', {}).get('url')
@@ -41,13 +66,15 @@ def process_links(input_file, output_file):
         data = load_json(input_file)
 
         # Process each link
-        for item in data.get('links', []):
-            if 'url' in item:
-                screenshot_url = get_screenshot_url(item['url'])
-                if screenshot_url:
-                    item['screenshot_url'] = screenshot_url
-                else:
-                    print(f"Failed to get screenshot for {item['url']}")
+        for index, item in enumerate(data.get('links', [])):
+            print(f'index: {index}')
+            if index >= 50:
+                if 'url' in item:
+                    screenshot_url = get_screenshot_url(item['url'])
+                    if screenshot_url:
+                        item['screenshot_url'] = screenshot_url
+                    else:
+                        print(f"Failed to get screenshot for {item['url']}")
 
         # Save the processed data
         save_json(data, output_file)
