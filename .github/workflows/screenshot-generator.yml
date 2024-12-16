@@ -3,7 +3,7 @@ name: Generate Screenshots
 on:
   schedule:
     # Runs at 2 AM GMT+8 (18:00 UTC the previous day)
-    - cron: '0 18 * * *'
+    - cron: '50 19 * * *'
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
         python-version: '3.x'
         
     - name: Install dependencies
-      run: pip install requests
+      run: pip install requests pillow crawl4ai
         
     - name: Generate Screenshots
       run: python main.py
