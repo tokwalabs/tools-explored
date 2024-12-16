@@ -1,6 +1,10 @@
 import json
 import requests
 import os
+from PIL import Image
+import io
+import asyncio
+from crawl4ai import AsyncWebCrawler, CacheMode
 
 # proxy = 'http://<user>:<pass>@<proxy>:<port>'
 # proxy_ip = ''
@@ -27,7 +31,45 @@ import os
 #     print('Proxy does not work')
 
 
-def get_screenshot_url(page_url):
+async def capture_and_save_screenshot_without_api(url: str, output_path: str):
+    async with AsyncWebCrawler(verbose=True) as crawler:
+        try:
+            result = await crawler.arun(
+                url=url,
+                screenshot=True,
+                simulate_user=True,
+                scan_full_page=False,
+                # adjust_viewport_to_content=True,
+                cache_mode=CacheMode.BYPASS
+            )
+
+            if result.success and result.screenshot:
+                import base64
+                screenshot_data = base64.b64decode(result.screenshot)
+
+                # Create an image from the screenshot data
+                image = Image.open(io.BytesIO(screenshot_data))
+
+                # Crop the image (adjust these values as needed)
+                width, height = 1920, 1080
+                cropped_image = image.crop((0, 0, width, height))
+
+                # Create the screenshots directory if it doesn't exist
+                os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+                # Save the cropped image
+                cropped_image.save(output_path)
+
+                # with open(output_path, 'wb') as f:
+                #     f.write(screenshot_data)
+                print(f"Screenshot saved successfully to {output_path}")
+            else:
+                print("Failed to capture screenshot")
+        except Exception as e:
+            print(e)
+
+
+def get_screenshot_url_with_api(page_url):
     """Get screenshot URL from Microlink API."""
     MICROLINK_API = "https://api.microlink.io"
     params = {
@@ -59,7 +101,7 @@ def save_json(data, filename):
         json.dump(data, f, indent=2)
 
 
-def process_links(input_file, output_file):
+async def process_links(input_file, output_file):
     """Process all links and add screenshot URLs."""
     try:
         # Load the JSON data
@@ -70,11 +112,14 @@ def process_links(input_file, output_file):
             print(f'index: {index}')
             if index >= 50:
                 if 'url' in item:
-                    screenshot_url = get_screenshot_url(item['url'])
+                    screenshot_url = get_screenshot_url_with_api(item['url'])
                     if screenshot_url:
                         item['screenshot_url'] = screenshot_url
                     else:
-                        print(f"Failed to get screenshot for {item['url']}")
+                        print(
+                            f"Failed to get screenshot for {item['url']}. Trying to capture locally...")
+                        await capture_and_save_screenshot_without_api(
+                            item['url'], f"screenshots/{item['label']}.png")
 
         # Save the processed data
         save_json(data, output_file)
@@ -86,5 +131,6 @@ def process_links(input_file, output_file):
 
 
 if __name__ == "__main__":
-    process_links('tools_explored_without_screenshot_url.json',
-                  'tools_explored_with_screenshot_url.json')
+    import asyncio
+    asyncio.run(process_links('tools_explored_without_screenshot_url.json',
+                              'tools_explored_with_screenshot_url.json'))
