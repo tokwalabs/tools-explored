@@ -263,37 +263,37 @@
     {
       "label": "Automa",
       "url": "https://www.automa.site/",
-      "screenshot_url": "https://iad.microlink.io/n4MtG3aHu9dEnJWpgehK89s4Gk7D1vYLR4u02gDklw_QDZQaQM6Wog_lUbqH1L-UASZUnLHMbVbS6NES_4DpAw.png"
+      "screenshot_url": "https://raw.githubusercontent.com/tokwalabs/tools-explored/refs/heads/main/screenshots/Automa.png"
     },
     {
       "label": "Flowise",
       "url": "https://flowiseai.com/",
-      "screenshot_url": "https://iad.microlink.io/ts8uNjIt9GA-o9_X_maxjeKmjzteiTYJXigpVTD65aAgQorwmPjnx3xXatYnBhNS3i-32lHLgRpZ6OLOHIr1EA.png"
+      "screenshot_url": "https://raw.githubusercontent.com/tokwalabs/tools-explored/refs/heads/main/screenshots/Flowise.png"
     },
     {
       "label": "Flyde",
       "url": "https://www.flyde.dev/",
-      "screenshot_url": "https://iad.microlink.io/Itc2uWBusfGSqpg2pAjbv_Z-ibUOVCt29WL0lDF-6SWZpbfJdUKyKEXUj_ABwp_kBTCV0g7vcBPaSYigDuVhig.png"
+      "screenshot_url": "https://raw.githubusercontent.com/tokwalabs/tools-explored/refs/heads/main/screenshots/Flyde.png"
     },
     {
       "label": "Continue.dev",
       "url": "https://www.continue.dev/",
-      "screenshot_url": "https://iad.microlink.io/i0DAFQouSVWM2nUjyy9freM7MQFofhxskJWATUi_Osr0bXnuF7M_-Hm3mchGkBJTVjRAXRKzWF6yzn2yRITlIQ.png"
+      "screenshot_url": "https://raw.githubusercontent.com/tokwalabs/tools-explored/refs/heads/main/screenshots/Continue.dev.png"
     },
     {
       "label": "wordware.ai",
       "url": "https://wordware.ai/",
-      "screenshot_url": "https://iad.microlink.io/fWgPsGFF8hK6Eh1xBlaWCZX2udAiVH2fy6GlmzFzil3iwy3K4BDVz5AvYILrGRbLHOEaRBORG_Wj5ZJWMmpJ4Q.png"
+      "screenshot_url": "https://raw.githubusercontent.com/tokwalabs/tools-explored/refs/heads/main/screenshots/wordware.ai.png"
     },
     {
       "label": "CopilotKit",
       "url": "https://www.copilotkit.ai/",
-      "screenshot_url": "https://iad.microlink.io/4byqeWyX9x3JBsZWajUSEwUURY0bRpSaPGBDGmaWhSzpnHg5Gm51uRHpuoi0467MvVpoJKry1xp1SOlVcVm_tA.png"
+      "screenshot_url": "https://raw.githubusercontent.com/tokwalabs/tools-explored/refs/heads/main/screenshots/CopilotKit.png"
     },
     {
       "label": "RouteLLM",
       "url": "https://github.com/lm-sys/RouteLLM",
-      "screenshot_url": "https://iad.microlink.io/2ILI5stdeX1WTN-VWMn8U8mWrNqa9osVGJSd_wq1d5bX40fBd41_jqXyYebZhWqhQWwz30S-2q_u7Hs-zZ-kFg.png"
+      "screenshot_url": "https://raw.githubusercontent.com/tokwalabs/tools-explored/refs/heads/main/screenshots/RouteLLM.png"
     }
   ]
 }
